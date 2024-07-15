@@ -19,7 +19,7 @@ export default function page() {
         <Heading as="h1" size="xl">
           POLÍTICA DE PRIVACIDAD PARA APLICACIONES MÓVILES (APPS)
         </Heading>
-        <Text mb={4}>Fecha de última actualización: [fecha]</Text>
+        <Text mb={4}>Fecha de última actualización: 11/07/2024</Text>
 
         <Text mb={4}>
           Conforme al Reglamento (UE) 2016/679, del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (Reglamento General de Protección de Datos – RGPD), EMPRESA informa a los usuarios de la aplicación _______________________ (en adelante, la Aplicación), acerca del tratamiento de datos personales que ellos voluntariamente hayan facilitado durante el proceso de registro, acceso y utilización del servicio.
