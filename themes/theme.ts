@@ -1,6 +1,6 @@
 /* theme.ts */
 import { extendTheme } from "@chakra-ui/react";
-import { colors } from "../shared/ui/colors"
+import { colors } from "./colors";
 
 const breakpoints = {
     xs: '480px',
