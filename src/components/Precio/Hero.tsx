@@ -1,9 +1,12 @@
 "use client"
 
-import { Box, Button, Flex, Icon, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { BsCheck } from "react-icons/bs";
+import { PaymentDrawer } from "./PaymentDrawer";
 
 export default function HeroPrecio() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Flex
             px={{ base: "20px", sm: "40px", md: "135px" }}
@@ -161,6 +164,7 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
+                            onClick={onOpen}
                         >
                             Comienza
                         </Button>
@@ -305,6 +309,7 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
+                            onClick={onOpen}
                         >
                             Comienza
                         </Button>
@@ -426,12 +431,18 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
+                            onClick={onOpen}
                         >
                             Comienza
                         </Button>
                     </Flex>
                 </Flex>
             </Flex>
+
+            <PaymentDrawer
+                isOpen={isOpen}
+                onClose={onClose}
+            />
         </Flex>
     )
 }
