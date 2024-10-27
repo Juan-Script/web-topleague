@@ -59,7 +59,7 @@ export default function Footer() {
     <Flex
       bg="linear-gradient(180deg, #202222 0%, #212E33 100%)"
       w="100%"
-      px={"135px"}
+      px={{ base: "20px", sm: "40px", md: "80px", lg: "135px" }}
       direction="column"
       gap="30px"
     >
@@ -69,10 +69,14 @@ export default function Footer() {
         py="20px"
         justifyContent="space-between"
         w="100%"
+        direction={{ base: "column", md: "row" }}
+        gap={{ base: "20px", md: "0" }}
       >
         <Flex
-          gap="40px"
+          gap={{ base: "20px", md: "40px" }}
           alignItems="center"
+          flexWrap="wrap"
+          justifyContent={{ base: "center", md: "flex-start" }}
         >
           {links.map((link, index) => (
             <ChakraLink
@@ -89,8 +93,9 @@ export default function Footer() {
         </Flex>
 
         <Flex
-          gap="40px"
+          gap={{ base: "20px", md: "40px" }}
           alignItems="center"
+          justifyContent={{ base: "center", md: "flex-start" }}
         >
           <ChakraLink
             as={Link}
@@ -117,7 +122,9 @@ export default function Footer() {
       <Flex
         justifyContent="space-between"
         w="100%"
-        alignItems="center"
+        alignItems={{ base: "center", lg: "flex-start" }}
+        direction={{ base: "column", lg: "row" }}
+        gap={{ base: "60px", lg: "0" }}
       >
         <Image
           src="/LogoTipo.png"
@@ -129,8 +136,7 @@ export default function Footer() {
         <Flex
           direction="column"
           gap="20px"
-          alignItems="center"
-          justifyContent="center"
+          alignItems={{ base: "center", lg: "flex-start" }}
         >
           <Text
             fontSize="20px"
@@ -171,7 +177,7 @@ export default function Footer() {
         <Flex
           direction="column"
           gap="24px"
-          alignItems="flex-start"
+          alignItems={{ base: "center", lg: "flex-start" }}
         >
           <Text
             fontSize="20px"

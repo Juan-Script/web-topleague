@@ -32,75 +32,77 @@ export default function Destacados() {
 
   return (
     <Flex
-      px={"135px"}
-      py={"100px"}
+      px={{ base: "20px", sm: "40px", md: "80px", lg: "135px" }}
+      py={{ base: "50px", md: "80px", lg: "100px" }}
       bg="#202222"
       justifyContent="center"
       alignItems="center"
       w="100%"
-      gap="30px"
+      gap={{ base: "20px", md: "30px" }}
       position="relative"
+      flexDirection={{ base: "column", lg: "row" }}
     >
       <Flex
         direction="column"
-        gap="40px"
-        w={"35%"}
+        gap={{ base: "20px", md: "40px" }}
+        w={{ base: "100%", lg: "35%" }}
+        textAlign={{ base: "center", lg: "left" }}
       >
         <Text
           color="white"
-          fontSize="40px"
+          fontSize={{ base: "28px", sm: "32px", md: "40px" }}
           fontWeight="700"
-          lineHeight="50px"
+          lineHeight={{ base: "36px", md: "50px" }}
         >
           Únete a la comunidad de TopLeague
         </Text>
 
         <Text
           color="white"
-          fontSize="20px"
+          fontSize={{ base: "16px", md: "20px" }}
           fontWeight="400"
-          lineHeight="32px"
+          lineHeight={{ base: "24px", md: "32px" }}
         >
           Todo lo que necesitas para una experiencia de liga fantasy inigualable.
         </Text>
       </Flex>
 
       <SimpleGrid
-        w={"65%"}
-        columns={2}
-        spacing={"30px"}
+        w={{ base: "100%", lg: "65%" }}
+        columns={{ base: 1, sm: 2 }}
+        spacing={{ base: "20px", md: "30px" }}
       >
         {items.map((item, index) => (
           <Flex
             key={index}
-            p="30px"
+            p={{ base: "20px", md: "30px" }}
             direction="column"
-            gap="30px"
+            gap={{ base: "20px", md: "30px" }}
             borderRadius="22px"
             bg="rgba(255, 255, 255, 0.10)"
             boxShadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           >
             <Flex
-              gap="30px"
+              gap={{ base: "15px", md: "30px" }}
               alignItems="center"
             >
               <Flex
-                w="64px"
-                h="64px"
-                p="13px"
+                w={{ base: "48px", md: "64px" }}
+                h={{ base: "48px", md: "64px" }}
+                p={{ base: "10px", md: "13px" }}
                 borderRadius="12px"
                 bg="#0094F1"
                 justifyContent="center"
                 alignItems="center"
               >
-                <Icon as={item?.icon} color="white" boxSize="38px" />
+                <Icon as={item?.icon} color="white" boxSize={{ base: "28px", md: "38px" }} />
               </Flex>
 
               <Text
                 color="white"
-                fontSize="24px"
+                fontSize={{ base: "20px", md: "24px" }}
                 fontWeight="700"
-                lineHeight="32px"
+                lineHeight={{ base: "28px", md: "32px" }}
               >
                 {item?.title}
               </Text>
@@ -108,9 +110,9 @@ export default function Destacados() {
 
             <Text
               color="white"
-              fontSize="16px"
+              fontSize={{ base: "14px", md: "16px" }}
               fontWeight="700"
-              lineHeight="24px"
+              lineHeight={{ base: "20px", md: "24px" }}
             >
               {item?.description}
             </Text>
@@ -124,8 +126,9 @@ export default function Destacados() {
         position="absolute"
         bottom="-50%"
         left="0"
-        w="507px"
-        h="782px"
+        w={{ base: "300px", md: "407px", lg: "507px" }}
+        h={{ base: "462px", md: "582px", lg: "782px" }}
+        display={{ base: "none", md: "block" }}
       />
     </Flex>
   )

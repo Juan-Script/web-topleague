@@ -23,40 +23,45 @@ export default function Testimonios() {
   return (
     <Flex
       direction="column"
-      gap="50px"
+      gap={{base: "30px", md: "50px"}}
       bg="#202222"
-      px={"135px"}
-      py={"100px"}
+      px={{base: "20px", sm: "40px", md: "80px", lg: "135px"}}
+      py={{base: "50px", md: "100px"}}
       justifyContent="center"
       alignItems="center"
     >
       <Text
-        fontSize="40px"
+        fontSize={{base: "28px", md: "40px"}}
         fontWeight={700}
         color="white"
-        lineHeight="50px"
+        lineHeight={{base: "36px", md: "50px"}}
+        textAlign="center"
       >
         ¿Qué dicen de nosotros?
       </Text>
 
       <Flex
-        gap="50px"
+        gap={{base: "20px", md: "50px"}}
+        direction={{base: "column", md: "row"}}
+        w="100%"
+        alignItems="center"
       >
         {testimonios.map((testimonio, index) => (
           <Flex
             key={index}
             direction="column"
             gap="30px"
-            bg="#F5F6F8"
+            bg="#1E272C"
             rounded="12px"
-            p="30px"
-            w="360px"
+            p={{base: "20px", md: "30px"}}
+            w={{base: "100%", md: "360px"}}
             justifyContent="space-between"
+            zIndex={99}
           >
             <Text
               fontSize="16px"
               fontWeight={400}
-              color="black"
+              color="white"
               lineHeight="24px"
             >
               {testimonio?.testimonio}
@@ -77,7 +82,7 @@ export default function Testimonios() {
               <Text
                 fontSize="16px"
                 fontWeight={600}
-                color="black"
+                color="white"
                 lineHeight="24px"
               >
                 {testimonio?.name}
@@ -91,13 +96,13 @@ export default function Testimonios() {
         bg="#0094F1"
         color="white"
         rounded="8px"
-        px={"20px"}
-        py={"14px"}
+        px={{base: "16px", md: "20px"}}
+        py={{base: "12px", md: "14px"}}
         w={"fit-content"}
         h={"fit-content"}
-        fontSize={"14px"}
+        fontSize={{base: "12px", md: "14px"}}
         fontWeight={700}
-        lineHeight={"18px"}
+        lineHeight={{base: "16px", md: "18px"}}
       >
         Contactar
       </Button>

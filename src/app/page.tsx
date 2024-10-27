@@ -15,18 +15,35 @@ export default function Home() {
       <Hero />
 
       <Flex
-        px={"135px"}
-        py={"100px"}
+        px={{
+          base: "20px",
+          xs: "30px",
+          sm: "60px",
+          md: "100px",
+          lg: "135px"
+        }}
+        py={{
+          base: "60px",
+          sm: "80px",
+          md: "100px"
+        }}
         bg="#202222"
         justifyContent="center"
         alignItems="center"
         w="100%"
       >
         <Text
-          fontSize="40px"
+          fontSize={{
+            base: "24px",
+            xs: "28px",
+            sm: "32px",
+            md: "36px",
+            lg: "40px"
+          }}
           fontWeight={700}
           color="white"
           lineHeight="50px"
+          textAlign={{ base: "center", lg: "left" }}
         >
           Una nueva forma de ver tu juego fantasy
         </Text>
