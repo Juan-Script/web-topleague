@@ -1,39 +1,80 @@
 "use client"
 
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { z } from "zod";
 
 export const CheckoutForm = () => {
+    const toast = useToast();
     const stripe: any = useStripe();
     const elements = useElements();
 
-    const [message, setMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [formData, setFormData] = useState<{
+        username: string;
+        email: string;
+    }>({
+        username: "",
+        email: "",
+    });
+
+    const [errors, setErrors] = useState<string[]>([]);
+
+    const formSchema = z.object({
+        username: z.string().min(1, "El nombre de usuario es obligatorio."),
+        email: z.string().email("El email debe ser válido.").min(1, "El email es obligatorio."),
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        setIsLoading(true);
+        try {
+            setIsLoading(true);
+            formSchema.parse(formData);
+            setErrors([]);
 
+            try {
+                const { error, paymentIntent } = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        return_url: "http://localhost:3000/precio",
+                    },
+                    redirect: "if_required",
+                });
 
-        const { error, paymentIntent } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: "",
-            },
-            redirect: "if_required",
-        });
+                if (error) {
+                    setErrors([error.message]);
+                } else if (paymentIntent && paymentIntent.status === "succeeded") {
+                    toast({
+                        title: 'Pago realizado con éxito.',
+                        description: "Recibirás un correo con la confirmación del pago.",
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true,
+                        position: "top"
+                    });
+                }
 
-        if (error) {
-            setMessage(error.message);
-        } else if (paymentIntent && paymentIntent.status === "succeeded") {
+            } catch (error) {
+                setErrors(["Ocurrió un error inesperado."]);
+            }
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                setErrors(error.errors.map(err => err.message));
+            }
+        } finally {
             setIsLoading(false);
-        } else {
-            setMessage("An unexpected error occurred.");
         }
-
-        setIsLoading(false);
     };
 
     const paymentElementOptions: any = {
@@ -48,7 +89,9 @@ export const CheckoutForm = () => {
             <form>
                 <Input
                     placeholder="Email TopLeague"
-                    value={""}
+                    value={formData.email}
+                    name="email"
+                    onChange={handleChange}
                     w="100%"
                     h="48px"
                     bg="white"
@@ -68,7 +111,9 @@ export const CheckoutForm = () => {
 
                 <Input
                     placeholder="Username TopLeague"
-                    value={""}
+                    value={formData.username}
+                    name="username"
+                    onChange={handleChange}
                     my="10px"
                     w="100%"
                     h="48px"
@@ -91,16 +136,24 @@ export const CheckoutForm = () => {
                     options={paymentElementOptions}
                 />
 
-                {message && (
-                    <Text
-                        mt="10px"
-                        fontSize="12px"
-                        color="red"
-                        fontWeight={700}
-                    >
-                        *{message}
-                    </Text>
-                )}
+                <Flex
+                    mt="10px"
+                    direction="column"
+                    gap="3px"
+                >
+                    {errors.length > 0 && (
+                        errors.map((error, index) => (
+                            <Text
+                                key={index}
+                                fontSize="12px"
+                                color="red"
+                                fontWeight={700}
+                            >
+                                *{error}
+                            </Text>
+                        ))
+                    )}
+                </Flex>
 
                 <Button
                     mt="25px"
@@ -114,8 +167,9 @@ export const CheckoutForm = () => {
                     borderRadius="8px"
                     bg="linear-gradient(91deg, #00499E 13.97%, #0495D3 85.67%)"
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || (formData.email === "" || !formData.email) || (formData.username === "" || !formData.username)}
                     onClick={handleSubmit}
+                    isLoading={isLoading}
                 >
                     Pagar ahora
                 </Button>

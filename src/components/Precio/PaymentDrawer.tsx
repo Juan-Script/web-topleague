@@ -4,40 +4,43 @@ import { Drawer, DrawerBody, DrawerContent, DrawerOverlay, Link as ChakraLink, F
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from "./PaymentForm";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
+import { TipoPagos } from "./Hero";
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
+    paymentType: TipoPagos | null;
+    setPaymentType: (paymentType: TipoPagos | null) => void;
 }
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC || "");
 
-export const PaymentDrawer = ({ isOpen, onClose }: Props) => {
-    const [clientSecret, setClientSecret] = useState<any>("pi_3PguI1G6y2N8ahRk06FLOndb_secret_UiWEmmFUKeKt7O9hBsMwfbXHk");
-    const [id, setId] = useState<string>('');
+export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: Props) => {
+    const [clientSecret, setClientSecret] = useState<string | null>(null);
+    const [id, setId] = useState<string | null>(null);
 
-    // useEffect(() => {
-    //     fetch("https://octopus-app-srtxk.ondigitalocean.app/v1/web/stripe/checkout", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "token": "934hjbjha78dy23jhbdas7t32j"
-    //         },
-    //         body: JSON.stringify({
-    //             plan: "standard",
-    //         }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             // setClientSecret(data?.clientSecret);
-    //             setId(data?.id);
+    useEffect(() => {
+        if (!paymentType) return;
 
-    //             console.log(data)
-    //         })
-    // }, []);
+        console.log(paymentType)
+        fetch("https://octopus-app-srtxk.ondigitalocean.app/v1/web/stripe/checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "token": "934hjbjha78dy23jhbdas7t32j"
+            },
+            body: JSON.stringify({
+                tipo: paymentType
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setClientSecret(data?.clientSecret);
+                setId(data?.id);
+            })
+    }, []);
 
     const appearance: any = {
         theme: 'stripe',
@@ -55,31 +58,31 @@ export const PaymentDrawer = ({ isOpen, onClose }: Props) => {
     };
 
     const options: any = {
-        clientSecret: "pi_3PguI1G6y2N8ahRk06FLOndb_secret_UiWEmmFUKeKt7O9hBsMwfbXHk",
+        clientSecret: clientSecret,
         appearance,
     };
 
-    const handleCancel = async (e: any) => {
-        // e.preventDefault();
+    const handleCancel = async (e: React.MouseEvent) => {
+        e.preventDefault();
 
-        // if (!process.env.NEXT_PUBLIC_URL_APICANCEL) return
-
-        // fetch(process.env.NEXT_PUBLIC_URL_APICANCEL, {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({
-        //         id: id,
-        //     }),
-        // })
-        //     .then((res) => res.json())
-        //     .then(() => {
-        //         toastNotify(toast, StatusEnumTypes.SUCCESS, 'Order canceled successfully')
-        //     })
-        //     .catch((error) => console.error(error));
-
-        // setPaymentVisible(false);
-        // setCurrentOrder(null);
-        // router.push('/')
+        fetch("https://octopus-app-srtxk.ondigitalocean.app/v1/web/stripe/cancel", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: id,
+            }),
+        })
+            .then((res) => res.json())
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => {
+                setClientSecret(null);
+                setId(null);
+                setPaymentType(null);
+                onClose();
+            })
     };
 
     return (
@@ -114,12 +117,12 @@ export const PaymentDrawer = ({ isOpen, onClose }: Props) => {
                         color="white"
                         bg="transparent"
                         border="1px solid white"
-                        onClick={onClose}
                         position="absolute"
                         top="20px"
                         left={{ base: "auto", sm: "20px" }}
                         right={{ base: "20px", sm: "auto" }}
                         leftIcon={<Icon as={BiArrowBack} boxSize="20px" />}
+                        onClick={(e: React.MouseEvent) => handleCancel(e)}
                     >
                         Salir
                     </Button>

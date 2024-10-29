@@ -3,9 +3,24 @@
 import { Box, Button, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { BsCheck } from "react-icons/bs";
 import { PaymentDrawer } from "./PaymentDrawer";
+import { useState } from "react";
+
+export enum TipoPagos {
+    STANDARD = 'standard',
+    BASIC = 'basic',
+    PREMIUM = 'premium',
+}
 
 export default function HeroPrecio() {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [paymentType, setPaymentType] = useState<TipoPagos | null>(null);
+
+    const onSelectPlan = (plan: TipoPagos) => {
+        setPaymentType(plan);
+
+        if (isOpen) onClose();
+        onOpen();
+    }
 
     return (
         <Flex
@@ -164,7 +179,11 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
-                            onClick={onOpen}
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                                e.stopPropagation();
+
+                                onSelectPlan(TipoPagos.BASIC)
+                            }}
                         >
                             Comienza
                         </Button>
@@ -309,7 +328,11 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
-                            onClick={onOpen}
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                                e.stopPropagation();
+
+                                onSelectPlan(TipoPagos.PREMIUM)
+                            }}
                         >
                             Comienza
                         </Button>
@@ -431,7 +454,11 @@ export default function HeroPrecio() {
                             fontSize="14px"
                             fontWeight={700}
                             lineHeight="18px"
-                            onClick={onOpen}
+                            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                                e.stopPropagation();
+
+                                onSelectPlan(TipoPagos.STANDARD)
+                            }}
                         >
                             Comienza
                         </Button>
@@ -439,10 +466,14 @@ export default function HeroPrecio() {
                 </Flex>
             </Flex>
 
-            <PaymentDrawer
-                isOpen={isOpen}
-                onClose={onClose}
-            />
+            {isOpen && paymentType && (
+                <PaymentDrawer
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    paymentType={paymentType}
+                    setPaymentType={setPaymentType}
+                />
+            )}
         </Flex>
     )
 }
