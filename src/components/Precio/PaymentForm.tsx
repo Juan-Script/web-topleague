@@ -4,8 +4,14 @@ import { Button, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { z } from "zod";
+import { TipoPagos } from "./Hero";
 
-export const CheckoutForm = () => {
+interface Props {
+    paymentType: TipoPagos | null;
+    onClose: () => void;
+}
+
+export const CheckoutForm = ({ paymentType, onClose }: Props) => {
     const toast = useToast();
     const stripe: any = useStripe();
     const elements = useElements();
@@ -43,30 +49,40 @@ export const CheckoutForm = () => {
             formSchema.parse(formData);
             setErrors([]);
 
-            try {
-                const { error, paymentIntent } = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                        return_url: "http://localhost:3000/precio",
+            const { error, paymentIntent } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    return_url: "http://localhost:3000/precio",
+                },
+                redirect: "if_required",
+            });
+
+            if (error) {
+                setErrors([error.message]);
+            } else if (paymentIntent && paymentIntent.status === "succeeded") {
+                toast({
+                    title: 'Pago realizado con éxito.',
+                    description: "Recibirás un correo con la confirmación del pago.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                })
+
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/confirmPayment`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "token": process.env.NEXT_PUBLIC_API_TOKEN!
                     },
-                    redirect: "if_required",
-                });
+                    body: JSON.stringify({
+                        email: formData.email,
+                        username: formData.username,
+                        type: paymentType
+                    }),
+                })
 
-                if (error) {
-                    setErrors([error.message]);
-                } else if (paymentIntent && paymentIntent.status === "succeeded") {
-                    toast({
-                        title: 'Pago realizado con éxito.',
-                        description: "Recibirás un correo con la confirmación del pago.",
-                        status: 'success',
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top"
-                    });
-                }
-
-            } catch (error) {
-                setErrors(["Ocurrió un error inesperado."]);
+                onClose();
             }
         } catch (error) {
             if (error instanceof z.ZodError) {

@@ -6,9 +6,21 @@ import { PaymentDrawer } from "./PaymentDrawer";
 import { useState } from "react";
 
 export enum TipoPagos {
-    STANDARD = 'standard',
-    BASIC = 'basic',
-    PREMIUM = 'premium',
+    SUSCRIPCION = 'suscripcion',
+    SUSCRIPCION_CAMISETA = 'suscripcion_camiseta',
+    PACK_LLAVEROS = 'pack_llaveros',
+}
+
+export const MontoPagos = {
+    [TipoPagos.SUSCRIPCION]: 10.99,
+    [TipoPagos.SUSCRIPCION_CAMISETA]: 36.99,
+    [TipoPagos.PACK_LLAVEROS]: 19.99,
+}
+
+export const descripcionPagos = {
+    [TipoPagos.SUSCRIPCION]: 'Suscripción',
+    [TipoPagos.SUSCRIPCION_CAMISETA]: 'Suscripción + Camiseta',
+    [TipoPagos.PACK_LLAVEROS]: 'Pack 5 llaveros',
 }
 
 export default function HeroPrecio() {
@@ -79,7 +91,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="32px"
                     >
-                        Basic
+                        Suscripción
                     </Text>
 
                     <Text
@@ -88,7 +100,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        Para 3
+                        Suscripción anual
                     </Text>
 
                     <Box
@@ -109,7 +121,7 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            39 €
+                            {MontoPagos[TipoPagos.SUSCRIPCION]} €
                         </Text>
 
                         <Flex
@@ -182,7 +194,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.BASIC)
+                                onSelectPlan(TipoPagos.SUSCRIPCION)
                             }}
                         >
                             Comienza
@@ -211,8 +223,9 @@ export default function HeroPrecio() {
                             fontWeight={600}
                             color="white"
                             lineHeight="32px"
+                            whiteSpace="nowrap"
                         >
-                            Premium
+                            Suscripción +
                         </Text>
 
                         <Text
@@ -225,6 +238,7 @@ export default function HeroPrecio() {
                             py="6px"
                             bg="#202222"
                             rounded="4px"
+                            whiteSpace="nowrap"
                         >
                             más popular
                         </Text>
@@ -236,7 +250,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        Para muchos
+                        Suscripción anual + Camiseta TopLeague
                     </Text>
 
                     <Box
@@ -257,7 +271,7 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            69 €
+                            {MontoPagos[TipoPagos.SUSCRIPCION_CAMISETA]} €
                         </Text>
 
                         <Flex
@@ -331,7 +345,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.PREMIUM)
+                                onSelectPlan(TipoPagos.SUSCRIPCION_CAMISETA)
                             }}
                         >
                             Comienza
@@ -354,7 +368,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="32px"
                     >
-                        Standard
+                        Pack Llaveros
                     </Text>
 
                     <Text
@@ -363,7 +377,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        Para 2
+                        5 Llaveros TopLeague
                     </Text>
 
                     <Box
@@ -384,7 +398,7 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            19 €
+                            {MontoPagos[TipoPagos.PACK_LLAVEROS]} €
                         </Text>
 
                         <Flex
@@ -457,7 +471,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.STANDARD)
+                                onSelectPlan(TipoPagos.PACK_LLAVEROS)
                             }}
                         >
                             Comienza

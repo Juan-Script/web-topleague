@@ -6,7 +6,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from "./PaymentForm";
 import { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { TipoPagos } from "./Hero";
+import { descripcionPagos, MontoPagos, TipoPagos } from "./Hero";
 
 interface Props {
     isOpen: boolean;
@@ -25,11 +25,11 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
         if (!paymentType) return;
 
         console.log(paymentType)
-        fetch("https://octopus-app-srtxk.ondigitalocean.app/v1/web/stripe/checkout", {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/stripe/checkout`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "token": "934hjbjha78dy23jhbdas7t32j"
+                "token": process.env.NEXT_PUBLIC_API_TOKEN!
             },
             body: JSON.stringify({
                 tipo: paymentType
@@ -65,9 +65,12 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
     const handleCancel = async (e: React.MouseEvent) => {
         e.preventDefault();
 
-        fetch("https://octopus-app-srtxk.ondigitalocean.app/v1/web/stripe/cancel", {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/stripe/cancel`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "token": process.env.NEXT_PUBLIC_API_TOKEN!
+            },
             body: JSON.stringify({
                 id: id,
             }),
@@ -177,7 +180,7 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                                         fontSize="13px"
                                         fontWeight={500}
                                     >
-                                        Plan
+                                        Detalle
                                     </Text>
 
                                     <Text
@@ -185,7 +188,7 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                                         fontSize="13px"
                                         fontWeight={500}
                                     >
-                                        Standard
+                                        {descripcionPagos[paymentType!]}
                                     </Text>
                                 </Flex>
 
@@ -207,7 +210,7 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                                         fontSize="13px"
                                         fontWeight={700}
                                     >
-                                        69 €
+                                        {MontoPagos[paymentType!]} €
                                     </Text>
                                 </Flex>
                             </Flex>
@@ -232,7 +235,10 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                             >
                                 {clientSecret ?
                                     <Elements stripe={stripePromise} options={options}>
-                                        <CheckoutForm />
+                                        <CheckoutForm
+                                            paymentType={paymentType}
+                                            onClose={onClose}
+                                        />
                                     </Elements>
                                     :
                                     <Skeleton

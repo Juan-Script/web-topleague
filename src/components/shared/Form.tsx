@@ -31,7 +31,6 @@ export default function Form() {
         email: z.string().email("El email debe ser válido.").min(1, "El email es obligatorio."),
         telefono: z.string().min(9, "El teléfono debe ser válido.").min(1, "El teléfono es obligatorio."),
         consentimientoDatos: z.boolean().refine(val => val === true, "Debes aceptar el uso de tus datos."),
-        consentimientoPublicidad: z.boolean().refine(val => val === true, "Debes aceptar recibir publicidad")
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,31 +50,36 @@ export default function Form() {
             formSchema.parse(formData);
             setErrors([]);
 
-            try {
-                if (true) {
-                    toast({
-                        title: 'Formulario enviado.',
-                        description: "Nos pondremos en contacto.",
-                        status: 'success',
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top"
-                    });
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sendLead`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": process.env.NEXT_PUBLIC_API_TOKEN!
+                },
+                body: JSON.stringify(formData),
+            })
 
-                    setFormData({
-                        nombre: "",
-                        apellido: "",
-                        email: "",
-                        telefono: "",
-                        consentimientoDatos: false,
-                    });
-                } else {
-                    // console.error(`Error: ${response.error}`);
-                    // setErrors([`Error al enviar el formulario: ${response.error}`]);
-                }
-            } catch (error) {
-                console.error('Error al enviar el formulario', error);
-                setErrors(['Error al enviar el formulario. Por favor, inténtalo de nuevo.']);
+
+            if (response.ok) {
+                toast({
+                    title: 'Formulario enviado.',
+                    description: "Nos pondremos en contacto.",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                });
+
+                setFormData({
+                    nombre: "",
+                    apellido: "",
+                    email: "",
+                    telefono: "",
+                    consentimientoDatos: false,
+                });
+            } else {
+                console.error(`Error: ${response.status}`);
+                setErrors([`Error al enviar el formulario. Por favor, inténtalo de nuevo.`]);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
@@ -98,6 +102,7 @@ export default function Form() {
                 mx="auto"
             >
                 <Input
+                    color="white"
                     name="nombre"
                     value={formData.nombre}
                     onChange={handleChange}
@@ -120,6 +125,7 @@ export default function Form() {
                 />
 
                 <Input
+                    color="white"
                     name="apellido"
                     value={formData.apellido}
                     onChange={handleChange}
@@ -142,6 +148,7 @@ export default function Form() {
                 />
 
                 <Input
+                    color="white"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
