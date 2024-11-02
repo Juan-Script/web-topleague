@@ -1,6 +1,19 @@
+"use client"
+
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function CardContacto() {
+  const MotionFlex = motion(Flex);
+
+  const cardContactoRef = useRef(null)
+
+  const isInView = useInView(cardContactoRef, {
+    once: true,
+    amount: 0.3
+  })
+
   return (
     <Flex
       direction="column"
@@ -11,7 +24,8 @@ export default function CardContacto() {
       justifyContent="center"
       alignItems="center"
     >
-      <Flex
+      <MotionFlex
+        ref={cardContactoRef}
         bg="#0094F1"
         px={{ base: "20px", sm: "40px", md: "60px" }}
         py={{ base: "30px", sm: "40px", md: "50px" }}
@@ -23,6 +37,9 @@ export default function CardContacto() {
         overflow="hidden"
         flexDirection={{ base: "column", sm: "row" }}
         gap={{ base: "20px", sm: "0" }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+        transition={{ duration: 1 }}
       >
         <Flex
           direction="column"
@@ -70,7 +87,7 @@ export default function CardContacto() {
           bg="#202222"
           opacity={0.5}
         />
-      </Flex>
+      </MotionFlex>
     </Flex>
   )
 }

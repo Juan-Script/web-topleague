@@ -1,8 +1,24 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+"use client"
+
+import { Flex, Image, Text } from '@chakra-ui/react'
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Funcionalidades() {
+
+  const MotionFlex = motion(Flex);
+
+
+  const funcionalidadesRef = useRef(null)
+
+  const isInView = useInView(funcionalidadesRef, {
+    once: true,
+    amount: 0.3
+  })
+
   return (
     <Flex
+      ref={funcionalidadesRef}
       bg="#212E33"
       w="100%"
       px={{ base: "20px", sm: "40px", md: "80px", lg: "135px" }}
@@ -47,7 +63,7 @@ export default function Funcionalidades() {
         maxW="825px"
         direction={{ base: "column", md: "row" }}
       >
-        <Flex
+        <MotionFlex
           minW="236px"
           minH="491px"
           borderRadius="22px"
@@ -55,6 +71,9 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
+          initial={{ opacity: 0, x: -200 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }}
+          transition={{ duration: 1 }}
         >
           <Image
             zIndex={99}
@@ -63,11 +82,14 @@ export default function Funcionalidades() {
             w="216px"
             h="467px"
           />
-        </Flex>
+        </MotionFlex>
 
-        <Flex
+        <MotionFlex
           direction="column"
           gap="30px"
+          initial={{ opacity: 0, x: 200 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 200 }}
+          transition={{ duration: 1 }}
         >
           <Text
             fontSize="24px"
@@ -88,7 +110,7 @@ export default function Funcionalidades() {
           >
             Consulta los resultados de los partidos en tiempo real y verifica tu posición en las ligas. Sigue de cerca tu progreso y el de tus rivales para ajustar tu estrategia y alcanzar la cima.
           </Text>
-        </Flex>
+        </MotionFlex>
       </Flex>
 
       <Flex
@@ -98,9 +120,12 @@ export default function Funcionalidades() {
         justifyContent="center"
         direction={{ base: "column-reverse", md: "row" }}
       >
-        <Flex
+        <MotionFlex
           direction="column"
           gap="80px"
+          initial={{ opacity: 0, x: -200 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }}
+          transition={{ duration: 1 }}
         >
           <Flex
             direction="column"
@@ -151,9 +176,9 @@ export default function Funcionalidades() {
               Participa en múltiples competiciones con diferentes modos de juego, clasificación y puntuación que te harán luchar por títulos hasta final de temporada.
             </Text>
           </Flex>
-        </Flex>
+        </MotionFlex>
 
-        <Flex
+        <MotionFlex
           minW="236px"
           minH="491px"
           borderRadius="22px"
@@ -161,6 +186,9 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
+          initial={{ opacity: 0, x: 200 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
         >
           <Image
             zIndex={99}
@@ -169,7 +197,7 @@ export default function Funcionalidades() {
             w="216px"
             h="467px"
           />
-        </Flex>
+        </MotionFlex>
       </Flex>
 
       <Flex
@@ -179,7 +207,7 @@ export default function Funcionalidades() {
         justifyContent="center"
         direction={{ base: "column", md: "row" }}
       >
-        <Flex
+        <MotionFlex
           minW="236px"
           minH="491px"
           borderRadius="22px"
@@ -187,6 +215,9 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
+          initial={{ opacity: 0, x: -200 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
         >
           <Image
             zIndex={99}
@@ -195,11 +226,14 @@ export default function Funcionalidades() {
             w="216px"
             h="467px"
           />
-        </Flex>
+        </MotionFlex>
 
-        <Flex
+        <MotionFlex
           direction="column"
           gap="30px"
+          initial={{ opacity: 0, x: 200 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
         >
           <Text
             fontSize="24px"
@@ -220,7 +254,7 @@ export default function Funcionalidades() {
           >
             Mantente al día con los resultados de todos los partidos y ligas. ¡No te pierdas ni un solo gol!
           </Text>
-        </Flex>
+        </MotionFlex>
       </Flex>
     </Flex>
   )

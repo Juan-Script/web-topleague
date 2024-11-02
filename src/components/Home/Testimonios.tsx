@@ -57,6 +57,7 @@ export default function Testimonios() {
             w={{base: "100%", md: "360px"}}
             justifyContent="space-between"
             zIndex={99}
+            h="340px"
           >
             <Text
               fontSize="16px"

@@ -1,7 +1,8 @@
 "use client"
 
 import { Flex, Icon, Image, SimpleGrid, Text } from '@chakra-ui/react'
-import React from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import { PiLayoutFill, PiPenNibStraightFill } from 'react-icons/pi'
 
 export default function Destacados() {
@@ -30,8 +31,18 @@ export default function Destacados() {
     }
   ]
 
+  const MotionFlex = motion(Flex);
+
+  const destacadosRef = useRef(null)
+
+  const isInView = useInView(destacadosRef, {
+    once: true,
+    amount: 0.3
+  })
+
   return (
     <Flex
+      ref={destacadosRef}
       px={{ base: "20px", sm: "40px", md: "80px", lg: "135px" }}
       py={{ base: "50px", md: "80px", lg: "100px" }}
       bg="#202222"
@@ -73,7 +84,7 @@ export default function Destacados() {
         spacing={{ base: "20px", md: "30px" }}
       >
         {items.map((item, index) => (
-          <Flex
+          <MotionFlex
             key={index}
             p={{ base: "20px", md: "30px" }}
             direction="column"
@@ -81,6 +92,9 @@ export default function Destacados() {
             borderRadius="22px"
             bg="rgba(255, 255, 255, 0.10)"
             boxShadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
           >
             <Flex
               gap={{ base: "15px", md: "30px" }}
@@ -116,7 +130,7 @@ export default function Destacados() {
             >
               {item?.description}
             </Text>
-          </Flex>
+          </MotionFlex>
         ))}
       </SimpleGrid>
 
