@@ -31,7 +31,7 @@ export default function Destacados() {
     }
   ]
 
-  const MotionFlex = motion(Flex);
+  const MotionFlex = motion(Flex as any);
 
   const destacadosRef = useRef(null)
 
@@ -92,9 +92,9 @@ export default function Destacados() {
             borderRadius="22px"
             bg="rgba(255, 255, 255, 0.10)"
             boxShadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ duration: 1, delay: index * 0.2 }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
           >
             <Flex
               gap={{ base: "15px", md: "30px" }}

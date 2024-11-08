@@ -4,6 +4,7 @@ import { Box, Button, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { BsCheck } from "react-icons/bs";
 import { PaymentDrawer } from "./PaymentDrawer";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export enum TipoPagos {
     SUSCRIPCION = 'suscripcion',
@@ -23,6 +24,9 @@ export const descripcionPagos = {
     [TipoPagos.PACK_LLAVEROS]: 'Pack 5 llaveros',
 }
 
+// Creamos un componente animado de Flex usando motion
+const AnimatedFlex = motion(Flex as any);
+
 export default function HeroPrecio() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [paymentType, setPaymentType] = useState<TipoPagos | null>(null);
@@ -34,9 +38,33 @@ export default function HeroPrecio() {
         onOpen();
     }
 
+    const containerVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5 }
+        }
+    };
+
     return (
-        <Flex
-            px={{ base: "20px", sm: "40px", md: "135px" }}
+        <AnimatedFlex
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            px={{ base: "20px", sm: "40px", md: "55px" }}
             py={{ base: "120px", md: "150px" }}
             bg="#202222"
             justifyContent="center"
@@ -45,7 +73,8 @@ export default function HeroPrecio() {
             gap="60px"
             direction="column"
         >
-            <Flex
+            <AnimatedFlex
+                variants={cardVariants}
                 direction="column"
                 gap={{ base: "20px", md: "30px" }}
                 justifyContent="center"
@@ -69,14 +98,16 @@ export default function HeroPrecio() {
                 >
                     Planes flexibles y asequibles para todos los aficionados. ¡Elige el que mejor se adapte a ti!
                 </Text>
-            </Flex>
+            </AnimatedFlex>
 
-            <Flex
+            <AnimatedFlex
+                variants={containerVariants}
                 justifyContent="center"
                 alignItems="center"
-                direction={{ base: "column", lg: "row" }}
+                direction={{ base: "column", md: "row",lg: "row" }}
             >
-                <Flex
+                <AnimatedFlex
+                    variants={cardVariants}
                     w={{ base: "90%", sm: "473px", lg: "373px" }}
                     h="524px"
                     py="64px"
@@ -200,9 +231,10 @@ export default function HeroPrecio() {
                             Comienza
                         </Button>
                     </Flex>
-                </Flex>
+                </AnimatedFlex>
 
-                <Flex
+                <AnimatedFlex
+                    variants={cardVariants}
                     w={{ base: "100%", sm: "573px", lg: "373px" }}
                     h="588px"
                     py="96px"
@@ -351,9 +383,10 @@ export default function HeroPrecio() {
                             Comienza
                         </Button>
                     </Flex>
-                </Flex>
+                </AnimatedFlex>
 
-                <Flex
+                <AnimatedFlex
+                    variants={cardVariants}
                     w={{ base: "90%", sm: "473px", lg: "373px" }}
                     h={"524px"}
                     py="64px"
@@ -477,8 +510,8 @@ export default function HeroPrecio() {
                             Comienza
                         </Button>
                     </Flex>
-                </Flex>
-            </Flex>
+                </AnimatedFlex>
+            </AnimatedFlex>
 
             {isOpen && paymentType && (
                 <PaymentDrawer
@@ -488,6 +521,6 @@ export default function HeroPrecio() {
                     setPaymentType={setPaymentType}
                 />
             )}
-        </Flex>
+        </AnimatedFlex>
     )
 }

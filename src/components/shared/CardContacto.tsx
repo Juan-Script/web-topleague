@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export default function CardContacto() {
-  const MotionFlex = motion(Flex);
+  const MotionFlex = motion(Flex as any);
 
   const cardContactoRef = useRef(null)
 
@@ -37,8 +37,8 @@ export default function CardContacto() {
         overflow="hidden"
         flexDirection={{ base: "column", sm: "row" }}
         gap={{ base: "20px", sm: "0" }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+        initial={{ opacity: 0}}
+        animate={isInView ? { opacity: 1 } : { opacity: 0}}
         transition={{ duration: 1 }}
       >
         <Flex

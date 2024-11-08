@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
 
-  const MotionText = motion(Text);
-  const MotionFlex = motion(Flex);
+  const MotionText = motion(Text as any);
+  const MotionFlex = motion(Flex as any);
 
   return (
     <Flex
