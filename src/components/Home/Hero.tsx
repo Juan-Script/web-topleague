@@ -9,6 +9,7 @@ export default function Hero() {
 
   const MotionText = motion(Text as any);
   const MotionFlex = motion(Flex as any);
+  const MotionImage = motion(Image as any);
 
   return (
     <Flex
@@ -79,7 +80,7 @@ export default function Hero() {
         </MotionFlex>
       </Flex>
 
-      <Image
+      <MotionImage
         position={{ base: "static", md: "absolute" }}
         top={{ md: 0 }}
         right={{ md: 0 }}
@@ -89,6 +90,15 @@ export default function Hero() {
         width={{ base: "100%", md: "50%", lg: 791 }}
         height={{ base: "auto", md: "100%", lg: 800 }}
         objectFit="cover"
+        initial={{ opacity: 0, x: 200 }}
+        animate={{ 
+          opacity: 1, 
+          x: 0,
+        }}
+        transition={{ 
+          duration: 0.8,
+          ease: "easeOut"
+        }}
       />
     </Flex>
   )

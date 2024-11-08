@@ -6,7 +6,7 @@ import { useRef } from 'react';
 
 export default function Funcionalidades() {
 
-  const MotionFlex = motion(Flex);
+  const MotionFlex = motion(Flex as any);
 
 
   const funcionalidadesRef = useRef(null)
