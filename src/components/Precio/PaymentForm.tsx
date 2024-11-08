@@ -52,7 +52,7 @@ export const CheckoutForm = ({ paymentType, onClose }: Props) => {
             const { error, paymentIntent } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: "http://localhost:3000/precio",
+                    return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/precios`,
                 },
                 redirect: "if_required",
             });
