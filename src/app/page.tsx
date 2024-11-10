@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { Flex, Text } from "@chakra-ui/react";
 
 // Crear versión animada del componente Text
-const MotionText = motion(Text);
+const MotionText = motion(Text as any);
 
 export default function Home() {
   return (
