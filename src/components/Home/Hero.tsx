@@ -57,24 +57,6 @@ export default function Hero() {
             Disfruta del futbol fantasy cada temporada dentro de una comunidad sana y divertida gestionada con pasión para que tú solo disfrutes. Juega distintas competiciones, enfréntate al resto de equipos de TopLeague y descubre una nueva experiencia fantasy.
           </Text>
 
-          <MotionImage
-            position="relative"
-            src="/PortadaHeroHome.png"
-            alt="Aplicación móvil TopLeague"
-            width={{ base: "280px", sm: "300px", md: "45%" }}
-            height="auto"
-            alignSelf="center"
-            objectFit="contain"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.2,
-              ease: "easeOut"
-            }}
-            zIndex={1}
-          />
-
           <Button
             bg="#0094F1"
             color="white"
@@ -117,6 +99,31 @@ export default function Hero() {
         }}
         zIndex={0}
       />
+
+
+      <Flex
+        mt={{base: "400px", md: "0px"}}
+      >
+        <MotionImage
+          position={{ base: "absolute" }}
+          right={{ base: "0%", md: "0%" }}
+          bottom="0"
+          src="/PortadaHeroHome.png"
+          alt="Aplicación móvil TopLeague"
+          width={{ base: "100%", sm: "90%", md: "45%" }}
+          height="auto"
+          maxHeight={{ base: "60%", sm: "70%", md: "90%" }}
+          objectFit="contain"
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.8,
+            delay: 0.2,
+            ease: "easeOut"
+          }}
+          zIndex={1}
+        />
+      </Flex>
     </Flex>
   )
 }
