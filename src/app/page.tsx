@@ -1,3 +1,5 @@
+"use client"
+
 import Destacados from "@/components/Home/Destacados";
 import Funcionalidades from "@/components/Home/Funcionalidades";
 import Hero from "@/components/Home/Hero";
@@ -5,7 +7,11 @@ import Testimonios from "@/components/Home/Testimonios";
 import CardContacto from "@/components/shared/CardContacto";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import { motion } from "framer-motion";
 import { Flex, Text } from "@chakra-ui/react";
+
+// Crear versión animada del componente Text
+const MotionText = motion(Text);
 
 export default function Home() {
   return (
@@ -32,7 +38,10 @@ export default function Home() {
         alignItems="center"
         w="100%"
       >
-        <Text
+        <MotionText
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
           fontSize={{
             base: "24px",
             xs: "28px",
@@ -46,7 +55,7 @@ export default function Home() {
           textAlign={{ base: "center", lg: "left" }}
         >
           Una nueva forma de ver tu juego fantasy
-        </Text>
+        </MotionText>
       </Flex>
 
       <Destacados />

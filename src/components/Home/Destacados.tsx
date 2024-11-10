@@ -3,7 +3,10 @@
 import { Flex, Icon, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { BiTimeFive } from 'react-icons/bi'
+import { HiOutlineViewGridAdd } from 'react-icons/hi'
 import { PiLayoutFill, PiPenNibStraightFill } from 'react-icons/pi'
+import { RiFootballFill } from 'react-icons/ri'
 
 export default function Destacados() {
 
@@ -11,17 +14,17 @@ export default function Destacados() {
     {
       title: "Resultados en Tiempo Real",
       description: "Mantente al día con los resultados de todos los partidos y ligas. ¡No te pierdas ni un solo gol!",
-      icon: PiPenNibStraightFill
+      icon: BiTimeFive
     },
     {
       title: "Estadísticas Detalladas",
       description: "Accede a estadísticas completas de todos los equipos y jugadores para tomar decisiones informadas y certeras.",
-      icon: PiPenNibStraightFill
+      icon: HiOutlineViewGridAdd
     },
     {
       title: "Emoción hasta la última jornada",
       description: "Tu Liga ha ideado un sistema de triple competición, que llevará a los managers al límite exigiendo adaptarse a cada modo de juego a lo largo del año.",
-      icon: PiPenNibStraightFill
+      icon: RiFootballFill
     },
     {
       title: "Multiliga y Gestión Integral",
