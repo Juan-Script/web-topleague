@@ -100,6 +100,7 @@ export default function Hero() {
         zIndex={0}
       />
 
+
       <MotionImage
         position={{ base: "absolute" }}
         right={{ base: "-10%", md: "0%" }}
