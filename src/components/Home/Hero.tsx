@@ -15,8 +15,8 @@ export default function Hero() {
     <Flex
       bg="linear-gradient(180deg, #212E33 0%, #202222 100%)"
       w="100%"
-      px={{ base: "0", sm: "0", md: "80px", lg: "190px" }}
-      pt={{ base: "100px", sm: "140px", md: "180px", lg: "220px" }}
+      px={{ base: "16px", sm: "24px", md: "80px", lg: "190px" }}
+      pt={{ base: "80px", sm: "120px", md: "180px", lg: "220px" }}
       pb={{ base: "60px", sm: "80px", md: "100px", lg: "120px" }}
       position="relative"
       direction={{ base: "column", md: "row" }}
@@ -26,14 +26,14 @@ export default function Hero() {
         w={{ base: "100%", md: "60%", lg: "65%" }}
         direction="column"
         gap={{ base: "24px", md: "32px", lg: "40px" }}
-        px={{ base: "20px", sm: "40px", md: "0" }}
+        px={{ base: "8px", sm: "24px", md: "0" }}
         zIndex={1}
       >
         <MotionText
           color="white"
-          fontSize={{ base: "28px", sm: "32px", md: "40px", lg: "48px" }}
+          fontSize={{ base: "24px", sm: "32px", md: "40px", lg: "48px" }}
           fontWeight={700}
-          lineHeight={{ base: "36px", sm: "42px", md: "52px", lg: "64px" }}
+          lineHeight={{ base: "32px", sm: "42px", md: "52px", lg: "64px" }}
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
@@ -56,6 +56,24 @@ export default function Hero() {
           >
             Disfruta del futbol fantasy cada temporada dentro de una comunidad sana y divertida gestionada con pasión para que tú solo disfrutes. Juega distintas competiciones, enfréntate al resto de equipos de TopLeague y descubre una nueva experiencia fantasy.
           </Text>
+
+          <MotionImage
+            position="relative"
+            src="/PortadaHeroHome.png"
+            alt="Aplicación móvil TopLeague"
+            width={{ base: "280px", sm: "300px", md: "45%" }}
+            height="auto"
+            alignSelf="center"
+            objectFit="contain"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.2,
+              ease: "easeOut"
+            }}
+            zIndex={1}
+          />
 
           <Button
             bg="#0094F1"
@@ -98,27 +116,6 @@ export default function Hero() {
           ease: "easeOut"
         }}
         zIndex={0}
-      />
-
-
-      <MotionImage
-        position={{ base: "absolute" }}
-        right={{ base: "-10%", md: "0%" }}
-        bottom="0"
-        src="/PortadaHeroHome.png"
-        alt="Aplicación móvil TopLeague"
-        width={{ base: "80%", md: "45%" }}
-        height="auto"
-        maxHeight={{ base: "80%", md: "90%" }}
-        objectFit="contain"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.8,
-          delay: 0.2,
-          ease: "easeOut"
-        }}
-        zIndex={1}
       />
     </Flex>
   )
