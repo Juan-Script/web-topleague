@@ -81,24 +81,43 @@ export default function Hero() {
       </Flex>
 
       <MotionImage
-        position={{ base: "static", md: "absolute" }}
-        top={{ md: 0 }}
-        right={{ md: 0 }}
-        mt={{ base: "-80px", sm: "-80px", md: "0" }}
-        src="/bgHero.png"
-        alt="bgHero"
-        width={{ base: "100%", md: "50%", lg: 791 }}
-        height={{ base: "auto", md: "100%", lg: 800 }}
+        position={{ base: "absolute" }}
+        right="0"
+        top="0"
+        bottom="0"
+        src="/bgHeroHome.png"
+        alt="Fondo ondulado"
+        width={{ base: "100%", md: "50%" }}
+        height="100%"
         objectFit="cover"
-        initial={{ opacity: 0, x: 200 }}
-        animate={{ 
-          opacity: 1, 
-          x: 0,
-        }}
-        transition={{ 
+        objectPosition="center right"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
           duration: 0.8,
           ease: "easeOut"
         }}
+        zIndex={0}
+      />
+
+      <MotionImage
+        position={{ base: "absolute" }}
+        right={{ base: "-10%", md: "0%" }}
+        bottom="0"
+        src="/PortadaHeroHome.png"
+        alt="Aplicación móvil TopLeague"
+        width={{ base: "80%", md: "45%" }}
+        height="auto"
+        maxHeight={{ base: "80%", md: "90%" }}
+        objectFit="contain"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+          ease: "easeOut"
+        }}
+        zIndex={1}
       />
     </Flex>
   )
