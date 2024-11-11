@@ -71,8 +71,8 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
-          initial={{ opacity: 0, x: -200 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }}
+          initial={{ opacity: 0, x: { base: -50, md: -200 } }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: { base: -50, md: -200 } }}
           transition={{ duration: 1 }}
         >
           <Image
@@ -87,8 +87,8 @@ export default function Funcionalidades() {
         <MotionFlex
           direction="column"
           gap="30px"
-          initial={{ opacity: 0, x: 200 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 200 }}
+          initial={{ opacity: 0, x: { base: 50, md: 200 } }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: { base: 50, md: 200 } }}
           transition={{ duration: 1 }}
         >
           <Text
@@ -123,8 +123,8 @@ export default function Funcionalidades() {
         <MotionFlex
           direction="column"
           gap="80px"
-          initial={{ opacity: 0, x: -200 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }}
+          initial={{ opacity: 0, x: { base: -50, md: -200 } }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: { base: -50, md: -200 } }}
           transition={{ duration: 1 }}
         >
           <Flex
@@ -186,7 +186,7 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
-          initial={{ opacity: 0, x: 200 }}
+          initial={{ opacity: 0, x: { base: 50, md: 200 } }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
@@ -215,7 +215,7 @@ export default function Funcionalidades() {
           shadow="0px 10px 60px 0px rgba(153, 153, 153, 0.07)"
           alignItems="center"
           justifyContent="center"
-          initial={{ opacity: 0, x: -200 }}
+          initial={{ opacity: 0, x: { base: -50, md: -200 } }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
@@ -231,7 +231,7 @@ export default function Funcionalidades() {
         <MotionFlex
           direction="column"
           gap="30px"
-          initial={{ opacity: 0, x: 200 }}
+          initial={{ opacity: 0, x: { base: 50, md: 200 } }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
