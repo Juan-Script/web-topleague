@@ -108,7 +108,7 @@ export default function HeroPrecio() {
                 <AnimatedFlex
                     variants={cardVariants}
                     w={{ base: "90%", sm: "473px", lg: "373px" }}
-                    h="524px"
+                    h="fit-content"
                     py="64px"
                     px="48px"
                     borderRadius={{ base: "24px 24px 0px 0px", lg: "24px 0px 0px 24px" }}
@@ -154,7 +154,7 @@ export default function HeroPrecio() {
                             {MontoPagos[TipoPagos.SUSCRIPCION]} €
                         </Text>
 
-                        <Flex
+                        {/* <Flex
                             direction="column"
                             gap="16px"
                         >
@@ -208,7 +208,7 @@ export default function HeroPrecio() {
                                     Acceso a la app
                                 </Text>
                             </Flex>
-                        </Flex>
+                        </Flex> */}
 
                         <Button
                             bg="#0094F1"
@@ -235,7 +235,7 @@ export default function HeroPrecio() {
                 <AnimatedFlex
                     variants={cardVariants}
                     w={{ base: "100%", sm: "573px", lg: "373px" }}
-                    h="588px"
+                    h="fit-content"
                     py="96px"
                     px="48px"
                     borderRadius="24px"
@@ -305,7 +305,7 @@ export default function HeroPrecio() {
                             {MontoPagos[TipoPagos.SUSCRIPCION_CAMISETA]} €
                         </Text>
 
-                        <Flex
+                        {/* <Flex
                             direction="column"
                             gap="16px"
                         >
@@ -359,7 +359,7 @@ export default function HeroPrecio() {
                                     Acceso a la app
                                 </Text>
                             </Flex>
-                        </Flex>
+                        </Flex> */}
 
                         <Button
                             bg="transparent"
@@ -387,7 +387,7 @@ export default function HeroPrecio() {
                 <AnimatedFlex
                     variants={cardVariants}
                     w={{ base: "90%", sm: "473px", lg: "373px" }}
-                    h={"524px"}
+                    h={"fit-content"}
                     py="64px"
                     px="48px"
                     borderRadius={{ base: "0px 0px 24px 24px", lg: "0px 24px 24px 0px" }}
@@ -433,7 +433,7 @@ export default function HeroPrecio() {
                             {MontoPagos[TipoPagos.PACK_LLAVEROS]} €
                         </Text>
 
-                        <Flex
+                        {/* <Flex
                             direction="column"
                             gap="16px"
                         >
@@ -487,7 +487,7 @@ export default function HeroPrecio() {
                                     Acceso a la app
                                 </Text>
                             </Flex>
-                        </Flex>
+                        </Flex> */}
 
                         <Button
                             bg="#0094F1"
