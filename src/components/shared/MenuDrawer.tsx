@@ -24,13 +24,13 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
                     >
                         <ChakraLink
                             as={Link}
-                            href="/competiciones"
+                            href="/"
                             color="white"
                             fontSize="18px"
                             fontWeight="400"
                             onClick={onClose}
                         >
-                            Competiciones
+                            Home
                         </ChakraLink>
                         <ChakraLink
                             as={Link}
@@ -52,19 +52,25 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
                         >
                             Contacto
                         </ChakraLink>
-                        <Button
-                            bg="#0094F1"
-                            color="white"
-                            rounded="8px"
-                            px="14px"
-                            py="10px"
-                            fontSize="14px"
-                            fontWeight="400"
-                            textTransform="uppercase"
-                            onClick={onClose}
+                        <ChakraLink
+                            as={Link}
+                            href="/descarga"
                         >
-                            Comienza
-                        </Button>
+                            <Button
+                                bg="#0094F1"
+                                color="white"
+                                rounded="8px"
+                                px="14px"
+                                py="10px"
+                                fontSize="14px"
+                                fontWeight="400"
+                                textTransform="uppercase"
+                                onClick={onClose}
+                                w="full"
+                            >
+                                Comienza
+                            </Button>
+                        </ChakraLink>
                     </VStack>
                 </DrawerBody>
             </DrawerContent>
