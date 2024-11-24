@@ -3,7 +3,7 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
+import Link from "next/link";
 export default function CardContacto() {
   const MotionFlex = motion(Flex as any);
 
@@ -60,8 +60,11 @@ export default function CardContacto() {
           </Text>
         </Flex>
 
-        <Button
-          bg="transparent"
+        <Link
+          href={"/descarga"}
+        >
+          <Button
+            bg="transparent"
           px="20px"
           py="14px"
           w="fit-content"
@@ -74,8 +77,9 @@ export default function CardContacto() {
           lineHeight="18px"
           zIndex={99}
         >
-          Contacto
-        </Button>
+            Comienza
+          </Button>
+        </Link>
 
         <Box
           position="absolute"
