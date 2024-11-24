@@ -16,7 +16,7 @@ export default function Hero() {
       bg="linear-gradient(180deg, #212E33 0%, #202222 100%)"
       w="100%"
       px={{ base: "16px", sm: "24px", md: "80px", lg: "190px" }}
-      pt={{ base: "80px", sm: "120px", md: "180px", lg: "220px" }}
+      pt={{ base: "140px", sm: "120px", md: "180px", lg: "220px" }}
       pb={{ base: "60px", sm: "80px", md: "100px", lg: "120px" }}
       position="relative"
       direction={{ base: "column", md: "row" }}

@@ -99,7 +99,6 @@ export default function Form() {
                 direction="column"
                 gap={{ base: "8px", sm: "10px", md: "12px" }}
                 maxW={{ base: "100%", sm: "90%", md: "80%", lg: "70%" }}
-                mx="auto"
             >
                 <Input
                     color="white"

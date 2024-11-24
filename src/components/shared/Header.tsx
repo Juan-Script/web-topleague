@@ -36,13 +36,13 @@ export default function Header() {
         <Flex gap="40px" alignItems="center">
           <ChakraLink
             as={Link}
-            href={"/competiciones"}
+            href={"/"}
             color="white"
             fontSize="14px"
             fontWeight="700"
             lineHeight="18px"
           >
-            Competiciones
+            Home
           </ChakraLink>
 
           <ChakraLink
@@ -67,21 +67,26 @@ export default function Header() {
             Contacto
           </ChakraLink>
 
-          <Button
-            bg="#0094F1"
-            color="white"
-            rounded="8px"
-            px={"14px"}
-            py={"10px"}
-            h="fit-content"
-            w="fit-content"
-            fontSize="14px"
-            fontWeight="700"
-            lineHeight="18px"
-            textTransform="uppercase"
+          <ChakraLink
+            as={Link}
+            href={"/descarga"}
           >
-            Comienza
-          </Button>
+            <Button
+              bg="#0094F1"
+              color="white"
+              rounded="8px"
+              px={"14px"}
+              py={"10px"}
+              h="fit-content"
+              w="fit-content"
+              fontSize="14px"
+              fontWeight="700"
+              lineHeight="18px"
+              textTransform="uppercase"
+            >
+              Comienza
+            </Button>
+          </ChakraLink>
         </Flex>
       </Hide>
 

@@ -19,7 +19,7 @@ export default function HeroContacto() {
                 flex="1"
             >
                 <Text
-                    fontSize={{base: "28px", sm: "32px", md: "36px", lg: "40px"}}
+                    fontSize={{base: "28px", sm: "32px", md: "32px", lg: "32px"}}
                     fontWeight={400}
                     color="white"
                 >
@@ -53,7 +53,7 @@ export default function HeroContacto() {
                 flex="1"
             >
                 <Text
-                    fontSize={{base: "28px", sm: "32px", md: "36px", lg: "40px"}}
+                    fontSize={{base: "28px", sm: "32px", md: "32px", lg: "32px"}}
                     fontWeight={400}
                     color="white"
                 >

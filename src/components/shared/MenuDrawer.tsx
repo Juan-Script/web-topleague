@@ -16,18 +16,18 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
             <DrawerOverlay />
             <DrawerContent bg="#202222">
                 <DrawerCloseButton color="white" />
-                <DrawerHeader color="white">Menú</DrawerHeader>
+                <DrawerHeader color="white">MENÚ</DrawerHeader>
                 <DrawerBody>
                     <VStack
-                        spacing={4}
+                        spacing={6}
                         align="stretch"
                     >
                         <ChakraLink
                             as={Link}
                             href="/competiciones"
                             color="white"
-                            fontSize="14px"
-                            fontWeight="700"
+                            fontSize="18px"
+                            fontWeight="400"
                             onClick={onClose}
                         >
                             Competiciones
@@ -36,8 +36,8 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
                             as={Link}
                             href="/precios"
                             color="white"
-                            fontSize="14px"
-                            fontWeight="700"
+                            fontSize="18px"
+                            fontWeight="400"
                             onClick={onClose}
                         >
                             Precios
@@ -46,8 +46,8 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
                             as={Link}
                             href="/contacto"
                             color="white"
-                            fontSize="14px"
-                            fontWeight="700"
+                            fontSize="18px"
+                            fontWeight="400"
                             onClick={onClose}
                         >
                             Contacto
@@ -59,7 +59,7 @@ export const MenuDrawer = ({ isOpen, onClose }: Props) => {
                             px="14px"
                             py="10px"
                             fontSize="14px"
-                            fontWeight="700"
+                            fontWeight="400"
                             textTransform="uppercase"
                             onClick={onClose}
                         >
