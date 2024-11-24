@@ -110,12 +110,7 @@ export default function Testimonios() {
           fontSize={{ base: "12px", md: "13px", lg: "14px" }}
           fontWeight={700}
           lineHeight={"18px"}
-          rightIcon={
-            <Icon
-              as={BsArrowRight}
-              boxSize={{ base: "14px", md: "15px", lg: "16px" }}
-            />
-          }
+        
         >
           Contactar
         </Button>
