@@ -15,21 +15,17 @@ export default function Footer() {
       href: "/",
     },
     {
-      label: "Federaciones",
-      href: "/federaciones",
-    },
-    {
-      label: "Dioses de fantasy",
-      href: "/dioses-de-fantasy",
-    },
-    {
-      label: "Noticias",
-      href: "/noticias",
+      label: "Precios",
+      href: "/precios",
     },
     {
       label: "Contacto",
       href: "/contacto",
     },
+    {
+      label: "Descargar App",
+      href: "/",
+    }
   ]
 
   const socialMedia = [
@@ -174,7 +170,7 @@ export default function Footer() {
           </Flex>
         </Flex>
 
-        <Flex
+        {/* <Flex
           direction="column"
           gap="24px"
           alignItems={{ base: "center", lg: "flex-start" }}
@@ -217,7 +213,7 @@ export default function Footer() {
               </ChakraLink>
             ))}
           </Flex>
-        </Flex>
+        </Flex> */}
       </Flex>
 
       <Flex

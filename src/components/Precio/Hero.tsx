@@ -24,7 +24,6 @@ export const descripcionPagos = {
     [TipoPagos.PACK_LLAVEROS]: 'Pack 5 llaveros',
 }
 
-// Creamos un componente animado de Flex usando motion
 const AnimatedFlex = motion(Flex as any);
 
 export default function HeroPrecio() {

@@ -1,4 +1,6 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react"
+import { Button, Flex, Icon, Image, Text } from "@chakra-ui/react"
+import Link from "next/link"
+import { BsArrowRight } from "react-icons/bs"
 
 export default function Testimonios() {
 
@@ -94,20 +96,30 @@ export default function Testimonios() {
         ))}
       </Flex>
 
-      <Button
-        bg="#0094F1"
-        color="white"
-        rounded="8px"
-        px={{ base: "16px", md: "20px" }}
-        py={{ base: "12px", md: "14px" }}
-        w={"fit-content"}
-        h={"fit-content"}
-        fontSize={{ base: "12px", md: "14px" }}
-        fontWeight={700}
-        lineHeight={{ base: "16px", md: "18px" }}
+      <Link
+        href={"/contacto"}
       >
-        Contactar
-      </Button>
+        <Button
+          bg="#0094F1"
+          color="white"
+          rounded="8px"
+          px={{ base: "16px", md: "18px", lg: "20px" }}
+          py={{ base: "12px", md: "13px", lg: "14px" }}
+          w={"fit-content"}
+          h={"fit-content"}
+          fontSize={{ base: "12px", md: "13px", lg: "14px" }}
+          fontWeight={700}
+          lineHeight={"18px"}
+          rightIcon={
+            <Icon
+              as={BsArrowRight}
+              boxSize={{ base: "14px", md: "15px", lg: "16px" }}
+            />
+          }
+        >
+          Contactar
+        </Button>
+      </Link>
     </Flex>
   )
 }

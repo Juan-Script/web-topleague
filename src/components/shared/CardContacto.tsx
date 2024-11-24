@@ -2,8 +2,9 @@
 
 import { Box, Button, Flex, Text } from "@chakra-ui/react"
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
+import { useRef } from "react";
+
 export default function CardContacto() {
   const MotionFlex = motion(Flex as any);
 
@@ -37,8 +38,8 @@ export default function CardContacto() {
         overflow="hidden"
         flexDirection={{ base: "column", sm: "row" }}
         gap={{ base: "20px", sm: "0" }}
-        initial={{ opacity: 0}}
-        animate={isInView ? { opacity: 1 } : { opacity: 0}}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 1 }}
       >
         <Flex
@@ -65,18 +66,18 @@ export default function CardContacto() {
         >
           <Button
             bg="transparent"
-          px="20px"
-          py="14px"
-          w="fit-content"
-          h="fit-content"
-          rounded="8px"
-          border="1px solid white"
-          color="white"
-          fontSize={{ base: "12px", md: "14px" }}
-          fontWeight={700}
-          lineHeight="18px"
-          zIndex={99}
-        >
+            px="20px"
+            py="14px"
+            w="fit-content"
+            h="fit-content"
+            rounded="8px"
+            border="1px solid white"
+            color="white"
+            fontSize={{ base: "12px", md: "14px" }}
+            fontWeight={700}
+            lineHeight="18px"
+            zIndex={99}
+          >
             Comienza
           </Button>
         </Link>

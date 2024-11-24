@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Flex, Icon, Image, Text } from '@chakra-ui/react'
+import { Button, Flex, Icon, Image, Link, Text } from '@chakra-ui/react'
 import React from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 import { motion } from "framer-motion";
@@ -57,8 +57,11 @@ export default function Hero() {
             Disfruta del futbol fantasy cada temporada dentro de una comunidad sana y divertida gestionada con pasión para que tú solo disfrutes. Juega distintas competiciones, enfréntate al resto de equipos de TopLeague y descubre una nueva experiencia fantasy.
           </Text>
 
-          <Button
-            bg="#0094F1"
+          <Link
+            href={"/contacto"}
+          >
+            <Button
+              bg="#0094F1"
             color="white"
             rounded="8px"
             px={{ base: "16px", md: "18px", lg: "20px" }}
@@ -77,6 +80,7 @@ export default function Hero() {
           >
             Contactar
           </Button>
+        </Link>
         </MotionFlex>
       </Flex>
 

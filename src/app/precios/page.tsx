@@ -6,7 +6,10 @@ import { Flex, Text } from "@chakra-ui/react";
 
 export default function page() {
     return (
-        <>
+        <Flex
+            direction="column"
+            bg="#202222"
+        >
             <Header />
 
             <HeroPrecio />
@@ -33,6 +36,6 @@ export default function page() {
             <CardContacto />
 
             <Footer />
-        </>
+        </Flex>
     )
 }
