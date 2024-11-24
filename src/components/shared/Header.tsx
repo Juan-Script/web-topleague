@@ -25,7 +25,7 @@ export default function Header() {
     >
       <ChakraLink as={Link} href="/">
         <Image
-          src="/LogoTipo.png"
+          src="/TLsvg.svg"
           alt="Logo"
           width="146px"
           height="26px"

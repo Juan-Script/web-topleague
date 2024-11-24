@@ -62,25 +62,25 @@ export default function Hero() {
           >
             <Button
               bg="#0094F1"
-            color="white"
-            rounded="8px"
-            px={{ base: "16px", md: "18px", lg: "20px" }}
-            py={{ base: "12px", md: "13px", lg: "14px" }}
-            w={"fit-content"}
-            h={"fit-content"}
-            fontSize={{ base: "12px", md: "13px", lg: "14px" }}
-            fontWeight={700}
-            lineHeight={"18px"}
-            rightIcon={
-              <Icon
-                as={BsArrowRight}
-                boxSize={{ base: "14px", md: "15px", lg: "16px" }}
-              />
-            }
-          >
-            Contactar
-          </Button>
-        </Link>
+              color="white"
+              rounded="8px"
+              px={{ base: "16px", md: "18px", lg: "20px" }}
+              py={{ base: "12px", md: "13px", lg: "14px" }}
+              w={"fit-content"}
+              h={"fit-content"}
+              fontSize={{ base: "12px", md: "13px", lg: "14px" }}
+              fontWeight={700}
+              lineHeight={"18px"}
+              rightIcon={
+                <Icon
+                  as={BsArrowRight}
+                  boxSize={{ base: "14px", md: "15px", lg: "16px" }}
+                />
+              }
+            >
+              Contactar
+            </Button>
+          </Link>
         </MotionFlex>
       </Flex>
 
@@ -106,7 +106,7 @@ export default function Hero() {
 
 
       <Flex
-        mt={{base: "400px", md: "0px"}}
+        mt={{ base: "400px", md: "0px" }}
       >
         <MotionImage
           position={{ base: "absolute" }}
