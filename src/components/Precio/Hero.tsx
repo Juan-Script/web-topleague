@@ -1,32 +1,23 @@
 "use client"
 
-import { Box, Button, Flex, Icon, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Text, useDisclosure, Skeleton } from "@chakra-ui/react";
 import { BsCheck } from "react-icons/bs";
 import { PaymentDrawer } from "./PaymentDrawer";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useData } from "@/hooks/useData";
 
 export enum TipoPagos {
-    SUSCRIPCION = 'suscripcion',
-    SUSCRIPCION_CAMISETA = 'suscripcion_camiseta',
-    PACK_LLAVEROS = 'pack_llaveros',
-}
-
-export const MontoPagos = {
-    [TipoPagos.SUSCRIPCION]: 10.99,
-    [TipoPagos.SUSCRIPCION_CAMISETA]: 36.99,
-    [TipoPagos.PACK_LLAVEROS]: 19.99,
-}
-
-export const descripcionPagos = {
-    [TipoPagos.SUSCRIPCION]: 'Suscripción',
-    [TipoPagos.SUSCRIPCION_CAMISETA]: 'Suscripción + Camiseta',
-    [TipoPagos.PACK_LLAVEROS]: 'Pack 5 llaveros',
+    BASE = 'base',
+    NORMAL = 'normal',
+    PREMIUM = 'premium',
 }
 
 const AnimatedFlex = motion(Flex as any);
 
 export default function HeroPrecio() {
+    const { data } = useData({ endpoint: 'tarifas' });
+    const { data: generalData, isLoading: generalDataLoading } = useData({ endpoint: 'general' });
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [paymentType, setPaymentType] = useState<TipoPagos | null>(null);
 
@@ -79,31 +70,39 @@ export default function HeroPrecio() {
                 justifyContent="center"
                 alignItems="center"
             >
-                <Text
-                    fontSize={{ base: "32px", md: "40px" }}
-                    fontWeight={700}
-                    color="white"
-                    lineHeight="50px"
-                >
-                    Precio
-                </Text>
+                {generalDataLoading ?
+                    <Skeleton height="50px" width="200px" rounded="8px" />
+                    :
+                    <Text
+                        fontSize={{ base: "32px", md: "40px" }}
+                        fontWeight={700}
+                        color="white"
+                        lineHeight="50px"
+                    >
+                        {(generalData as any)?.general?.titulo_tarifas}
+                    </Text>
+                }
 
-                <Text
-                    fontSize="20px"
-                    fontWeight={400}
-                    color="white"
-                    lineHeight="32px"
-                    textAlign="center"
-                >
-                    Planes flexibles y asequibles para todos los aficionados. ¡Elige el que mejor se adapte a ti!
-                </Text>
+                {generalDataLoading ?
+                    <Skeleton height="32px" width="600px" rounded="8px" />
+                    :
+                    <Text
+                        fontSize="20px"
+                        fontWeight={400}
+                        color="white"
+                        lineHeight="32px"
+                        textAlign="center"
+                    >
+                        {(generalData as any)?.general?.descripcion_tarifas}
+                    </Text>
+                }
             </AnimatedFlex>
 
             <AnimatedFlex
                 variants={containerVariants}
                 justifyContent="center"
                 alignItems="center"
-                direction={{ base: "column", md: "row",lg: "row" }}
+                direction={{ base: "column", md: "row", lg: "row" }}
             >
                 <AnimatedFlex
                     variants={cardVariants}
@@ -121,7 +120,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="32px"
                     >
-                        Suscripción
+                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.BASE)?.titulo}
                     </Text>
 
                     <Text
@@ -130,7 +129,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        Suscripción anual
+                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.BASE)?.descripcion}
                     </Text>
 
                     <Box
@@ -151,64 +150,32 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            {MontoPagos[TipoPagos.SUSCRIPCION]} €
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.BASE)?.precio} €
                         </Text>
 
-                        {/* <Flex
+                        <Flex
                             direction="column"
                             gap="16px"
                         >
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.BASE)?.caracteristicas.map((caracteristica: any) => (
+                                <Flex>
+                                    <Icon
+                                        as={BsCheck}
+                                        color="#0094F1"
+                                        boxSize="24px"
+                                    />
 
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-                        </Flex> */}
+                                    <Text
+                                        fontSize="14px"
+                                        fontWeight={400}
+                                        color="white"
+                                        lineHeight="24px"
+                                    >
+                                        {caracteristica?.titulo}
+                                    </Text>
+                                </Flex>
+                            ))}
+                        </Flex>
 
                         <Button
                             bg="#0094F1"
@@ -224,7 +191,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.SUSCRIPCION)
+                                onSelectPlan(TipoPagos.BASE)
                             }}
                         >
                             Comienza
@@ -256,7 +223,7 @@ export default function HeroPrecio() {
                             lineHeight="32px"
                             whiteSpace="nowrap"
                         >
-                            Suscripción +
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.PREMIUM)?.titulo}
                         </Text>
 
                         <Text
@@ -281,7 +248,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        Suscripción anual + Camiseta TopLeague
+                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.PREMIUM)?.descripcion}
                     </Text>
 
                     <Box
@@ -302,64 +269,32 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            {MontoPagos[TipoPagos.SUSCRIPCION_CAMISETA]} €
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.PREMIUM)?.precio} €
                         </Text>
 
-                        {/* <Flex
+                        <Flex
                             direction="column"
                             gap="16px"
                         >
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="white"
-                                    boxSize="24px"
-                                />
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.PREMIUM)?.caracteristicas.map((caracteristica: any) => (
+                                <Flex>
+                                    <Icon
+                                        as={BsCheck}
+                                        color="white"
+                                        boxSize="24px"
+                                    />
 
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="white"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="white"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-                        </Flex> */}
+                                    <Text
+                                        fontSize="14px"
+                                        fontWeight={400}
+                                        color="white"
+                                        lineHeight="24px"
+                                    >
+                                        {caracteristica?.titulo}
+                                    </Text>
+                                </Flex>
+                            ))}
+                        </Flex>
 
                         <Button
                             bg="transparent"
@@ -376,7 +311,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.SUSCRIPCION_CAMISETA)
+                                onSelectPlan(TipoPagos.PREMIUM)
                             }}
                         >
                             Comienza
@@ -400,7 +335,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="32px"
                     >
-                        Pack Llaveros
+                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.NORMAL)?.titulo}
                     </Text>
 
                     <Text
@@ -409,7 +344,7 @@ export default function HeroPrecio() {
                         color="white"
                         lineHeight="24px"
                     >
-                        5 Llaveros TopLeague
+                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.NORMAL)?.descripcion}
                     </Text>
 
                     <Box
@@ -430,64 +365,32 @@ export default function HeroPrecio() {
                             lineHeight="48px"
                             letterSpacing="-0.4px"
                         >
-                            {MontoPagos[TipoPagos.PACK_LLAVEROS]} €
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.NORMAL)?.precio} €
                         </Text>
 
-                        {/* <Flex
+                        <Flex
                             direction="column"
                             gap="16px"
                         >
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
+                            {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === TipoPagos.NORMAL)?.caracteristicas.map((caracteristica: any) => (
+                                <Flex>
+                                    <Icon
+                                        as={BsCheck}
+                                        color="#0094F1"
+                                        boxSize="24px"
+                                    />
 
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-
-                            <Flex>
-                                <Icon
-                                    as={BsCheck}
-                                    color="#0094F1"
-                                    boxSize="24px"
-                                />
-
-                                <Text
-                                    fontSize="14px"
-                                    fontWeight={400}
-                                    color="white"
-                                    lineHeight="24px"
-                                >
-                                    Acceso a la app
-                                </Text>
-                            </Flex>
-                        </Flex> */}
+                                    <Text
+                                        fontSize="14px"
+                                        fontWeight={400}
+                                        color="white"
+                                        lineHeight="24px"
+                                    >
+                                        {caracteristica?.titulo}
+                                    </Text>
+                                </Flex>
+                            ))}
+                        </Flex>
 
                         <Button
                             bg="#0094F1"
@@ -503,7 +406,7 @@ export default function HeroPrecio() {
                             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                 e.stopPropagation();
 
-                                onSelectPlan(TipoPagos.PACK_LLAVEROS)
+                                onSelectPlan(TipoPagos.NORMAL)
                             }}
                         >
                             Comienza
@@ -518,6 +421,7 @@ export default function HeroPrecio() {
                     onClose={onClose}
                     paymentType={paymentType}
                     setPaymentType={setPaymentType}
+                    data={data}
                 />
             )}
         </AnimatedFlex>

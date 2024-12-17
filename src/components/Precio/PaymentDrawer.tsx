@@ -6,18 +6,19 @@ import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from "./PaymentForm";
 import { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { descripcionPagos, MontoPagos, TipoPagos } from "./Hero";
+import { TipoPagos } from "./Hero";
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
     paymentType: TipoPagos | null;
     setPaymentType: (paymentType: TipoPagos | null) => void;
+    data: any;
 }
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC || "");
 
-export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: Props) => {
+export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType, data }: Props) => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [id, setId] = useState<string | null>(null);
 
@@ -188,7 +189,7 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                                         fontSize="13px"
                                         fontWeight={500}
                                     >
-                                        {descripcionPagos[paymentType!]}
+                                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === paymentType)?.descripcion}
                                     </Text>
                                 </Flex>
 
@@ -210,7 +211,7 @@ export const PaymentDrawer = ({ isOpen, onClose, paymentType, setPaymentType }: 
                                         fontSize="13px"
                                         fontWeight={700}
                                     >
-                                        {MontoPagos[paymentType!]} €
+                                        {(data as any)?.find((tarifa: any) => tarifa?.tipo_plan === paymentType)?.precio} €
                                     </Text>
                                 </Flex>
                             </Flex>
