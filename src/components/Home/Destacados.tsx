@@ -8,31 +8,26 @@ import { HiOutlineViewGridAdd } from 'react-icons/hi'
 import { PiLayoutFill, PiPenNibStraightFill } from 'react-icons/pi'
 import { RiFootballFill } from 'react-icons/ri'
 
-export default function Destacados() {
+interface DestacadosProps {
+  data: any
+}
 
-  const items = [
-    {
-      title: "Resultados en Tiempo Real",
-      description: "Mantente al día con los resultados de todos los partidos y ligas. ¡No te pierdas ni un solo gol!",
-      icon: BiTimeFive
-    },
-    {
-      title: "Estadísticas Detalladas",
-      description: "Accede a estadísticas completas de todos los equipos y jugadores para tomar decisiones informadas y certeras.",
-      icon: HiOutlineViewGridAdd
-    },
-    {
-      title: "Emoción hasta la última jornada",
-      description: "Tu Liga ha ideado un sistema de triple competición, que llevará a los managers al límite exigiendo adaptarse a cada modo de juego a lo largo del año.",
-      icon: RiFootballFill
-    },
-    {
-      title: "Multiliga y Gestión Integral",
-      description: "Personaliza tu equipo con jugadores únicos, diseña tu estadio y ajusta las reglas de tu liga para una experiencia a tu medida.",
-      icon: PiLayoutFill
+export default function Destacados({ data }: DestacadosProps) {
 
-    }
+  console.log(data)
+
+  const icons = [
+    BiTimeFive,
+    HiOutlineViewGridAdd,
+    RiFootballFill,
+    PiLayoutFill
   ]
+
+  const items = data?.carateristicas?.map((item: any, index: number) => ({
+    title: item?.titulo,
+    description: item?.descripcion,
+    icon: icons[index]
+  }))
 
   const MotionFlex = motion(Flex as any);
 
@@ -68,7 +63,7 @@ export default function Destacados() {
           fontWeight="700"
           lineHeight={{ base: "36px", md: "50px" }}
         >
-          Únete a la comunidad de TopLeague
+          {data?.general?.titulo_caracteristicas}
         </Text>
 
         <Text
@@ -77,7 +72,7 @@ export default function Destacados() {
           fontWeight="400"
           lineHeight={{ base: "24px", md: "32px" }}
         >
-          Todo lo que necesitas para una experiencia de liga fantasy inigualable.
+          {data?.general?.descripcion_caracteristicas}
         </Text>
       </Flex>
 
@@ -86,7 +81,7 @@ export default function Destacados() {
         columns={{ base: 1, sm: 2 }}
         spacing={{ base: "20px", md: "30px" }}
       >
-        {items.map((item, index) => (
+        {items?.map((item: any, index: number) => (
           <MotionFlex
             key={index}
             p={{ base: "20px", md: "30px" }}

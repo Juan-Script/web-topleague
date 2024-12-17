@@ -6,46 +6,49 @@ import Testimonios from "@/components/Home/Testimonios";
 import CardContacto from "@/components/shared/CardContacto";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import { getRevalidatedData } from "@/hooks/getRevalidateData";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const TITLE = "TopLeague - Fantasy Football"
   const DESCRIPTION = 'Una nueva forma de ver tu juego fantasy'
   return {
+    title: TITLE,
+    description: DESCRIPTION,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+    openGraph: {
+      type: 'website',
       title: TITLE,
       description: DESCRIPTION,
-      robots: {
-          index: true,
-          follow: true,
-          googleBot: {
-              index: true,
-              follow: true,
-          },
-      },
-      openGraph: {
-          type: 'website',
-          title: TITLE,
-          description: DESCRIPTION,
-          url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-          images: ["/OP.webp"],
-      },
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      images: ["/OP.webp"],
+    },
   }
 }
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await getRevalidatedData('general') as any;
+
   return (
     <>
       <Header />
 
-      <Hero />
+      <Hero data={data?.general} />
 
-      <Banner />
+      <Banner data={data?.general} />
 
-      <Destacados />
+      <Destacados data={data} />
 
-      <Funcionalidades />
+      <Funcionalidades data={data} />
 
-      <Testimonios />
+      <Testimonios data={data} />
 
       <CardContacto />
 

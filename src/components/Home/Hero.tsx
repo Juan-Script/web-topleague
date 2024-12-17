@@ -5,7 +5,11 @@ import React from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 import { motion } from "framer-motion";
 
-export default function Hero() {
+interface HeroProps {
+  data: any
+}
+
+export default function Hero({ data }: HeroProps) {
 
   const MotionText = motion(Text as any);
   const MotionFlex = motion(Flex as any);
@@ -38,7 +42,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          ¡Únete a la comunidad fantasy de TopLeague y vive una temporada llena de emociones y diversión!
+          {data?.titulo_hero}
         </MotionText>
 
         <MotionFlex
@@ -54,7 +58,7 @@ export default function Hero() {
             fontWeight={400}
             lineHeight={{ base: "24px", md: "28px", lg: "32px" }}
           >
-            Disfruta del futbol fantasy cada temporada dentro de una comunidad sana y divertida gestionada con pasión para que tú solo disfrutes. Juega distintas competiciones, enfréntate al resto de equipos de TopLeague y descubre una nueva experiencia fantasy.
+            {data?.descripcion_hero}
           </Text>
 
           <Link

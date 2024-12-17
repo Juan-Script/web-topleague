@@ -1,26 +1,11 @@
-import { Button, Flex, Icon, Image, Text } from "@chakra-ui/react"
+import { Button, Flex, Image, Text } from "@chakra-ui/react"
 import Link from "next/link"
-import { BsArrowRight } from "react-icons/bs"
 
-export default function Testimonios() {
+interface TestimoniosProps {
+  data: any
+}
 
-  const testimonios = [
-    {
-      name: "Carlos Méndez",
-      testimonio: '"Como jugador de fantasy, siempre busco esa emoción y nuevos desafíos contra mis amigos y otros clubes.Desde que descubrí TopLeague, mi experiencia ha sido increíble y súper recomendable."',
-      image: "/person1.png"
-    },
-    {
-      name: "Laura García",
-      testimonio: '"Todo está organizado de manera clara y accesible, teniendo los resultados y clasificaciones a mano. Me encanta cómo puedo acceder rápidamente a la información sobre otro club rival o mi calendario de torneos"',
-      image: "/person2.png"
-    },
-    {
-      name: "Andrés López",
-      testimonio: '"Los torneos y portadas personalizadas han sido un verdadero cambio de ver el juego, hace que la emoción y el buen ambiente esté presente toda la temporada. Poder personalizar mi estadio es un puntazo y lo del presidente me parece muy original"',
-      image: "/person3.png"
-    }
-  ]
+export default function Testimonios({ data }: TestimoniosProps) {
 
   return (
     <Flex
@@ -49,7 +34,7 @@ export default function Testimonios() {
         align="center"
         justify="center"
       >
-        {testimonios.map((testimonio, index) => (
+        {data?.testimonios?.map((testimonio: any, index: any) => (
           <Flex
             key={index}
             direction="column"
@@ -76,8 +61,8 @@ export default function Testimonios() {
               alignItems="center"
             >
               <Image
-                src={testimonio?.image}
-                alt={testimonio?.name}
+                src={testimonio?.avatar?.url}
+                alt={testimonio?.nombre}
                 w="60px"
                 h="60px"
                 rounded="60px"
@@ -89,7 +74,7 @@ export default function Testimonios() {
                 color="white"
                 lineHeight="24px"
               >
-                {testimonio?.name}
+                {testimonio?.nombre}
               </Text>
             </Flex>
           </Flex>
@@ -110,7 +95,7 @@ export default function Testimonios() {
           fontSize={{ base: "12px", md: "13px", lg: "14px" }}
           fontWeight={700}
           lineHeight={"18px"}
-        
+
         >
           Contactar
         </Button>
