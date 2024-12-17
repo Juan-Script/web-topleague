@@ -6,7 +6,11 @@ import { Flex, Text } from "@chakra-ui/react";
 
 const MotionText = motion(Text as any);
 
-export default function Banner() {
+interface BannerProps {
+    data: any
+}
+
+export default function Banner({ data }: BannerProps) {
     return (
         <Flex
             px={{
@@ -42,7 +46,7 @@ export default function Banner() {
                 lineHeight="50px"
                 textAlign={{ base: "center", lg: "left" }}
             >
-                Una nueva forma de ver tu juego fantasy
+                {data?.frase}
             </MotionText>
         </Flex>
     )

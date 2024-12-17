@@ -1,8 +1,11 @@
-import { Button, Flex, Icon, Image, Text } from "@chakra-ui/react"
+import { Button, Flex, Image, Text } from "@chakra-ui/react"
 import Link from "next/link"
-import { BsArrowRight } from "react-icons/bs"
 
-export default function Testimonios() {
+interface TestimoniosProps {
+  data: any
+}
+
+export default function Testimonios({ data }: TestimoniosProps) {
 
   const testimonios = [
     {
